@@ -1,5 +1,5 @@
-# understood
-accept-language parsing plugin for hapi
+# understandable
+accept-language parsing plugin enhancement for hapi based on understood
 
 [![Build Status](https://secure.travis-ci.org/geek/understood.svg)](http://travis-ci.org/geek/understood)
 
