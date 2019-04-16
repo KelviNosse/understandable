@@ -13,25 +13,23 @@ const expect = Code.expect;
 
 
 describe('hapi plugin registration', () => {
-  it('succeeds with locales option', (done) => {
+  it('succeeds with locales option', () => {
     const server = new Hapi.Server();
     server.connection();
     server.register({ register: Understood, options: { locales: ['us'] } }, (err) => {
       expect(err).to.not.exist();
-      done();
     });
   });
 
-  it('succeeds with localesDir option', (done) => {
+  it('succeeds with localesDir option', () => {
     const server = new Hapi.Server();
     server.connection();
     server.register({ register: Understood, options: { localesDir: (__dirname + '/locales') } }, (err) => {
       expect(err).to.not.exist();
-      done();
     });
   });
 
-  it('throws if missing all options', (done) => {
+  it('throws if missing all options', () => {
     const server = new Hapi.Server();
     server.connection();
     const fn = function () {
@@ -41,12 +39,11 @@ describe('hapi plugin registration', () => {
     };
 
     expect(fn).to.throw();
-    done();
   });
 });
 
 describe('handling requests', () => {
-  it('sets request.locales with correct Accept-Language from available locales', (done) => {
+  it('sets request.locales with correct Accept-Language from available locales', () => {
     const server = new Hapi.Server();
     server.connection();
     server.register({ register: Understood, options: { localesDir: (__dirname + '/locales') } }, (err) => {
@@ -63,12 +60,11 @@ describe('handling requests', () => {
 
       server.inject({ url: '/', headers: { 'Accept-Language': 'en-GB,en-US;' } }, (res) => {
         expect(res.statusCode).to.equal(200);
-        done();
       });
     });
   });
 
-  it('sets request.locales to default when no match is found', (done) => {
+  it('sets request.locales to default when no match is found', () => {
     const server = new Hapi.Server();
     server.connection();
     server.register({ register: Understood, options: { localesDir: (__dirname + '/locales'), default: 'fr-CA' } }, (err) => {
@@ -85,7 +81,6 @@ describe('handling requests', () => {
 
       server.inject({ url: '/', headers: { 'Accept-Language': 'en-GB;' } }, (res) => {
         expect(res.statusCode).to.equal(200);
-        done();
       });
     });
   });
